@@ -1,0 +1,29 @@
+create database Demo01;
+
+use Demo01;
+
+create table T(
+tno char(5) primary key,
+title varchar(25) check(title="讲师" or title="教授" or title="副教授")
+);
+
+create table C(
+cno char(5) primary key,
+tno char(5),
+constraint foreign key(tno) references T(tno)
+);
+
+alter table C add canme char(5) unique;
+
+alter table C add credit int;
+
+alter table C drop column credit;
+
+alter table C drop index canme;
+
+create table sc(
+sno char(5) primary key,
+sname char(5) unique not null,
+cno char(5),
+constraint foreign key(cno) references C(cno)
+);
